@@ -1,0 +1,48 @@
+
+User - BCNF primary key points to all 
+    ID -> everything
+
+Product - BCNF primary points to all
+    ID -> evertying 
+
+purchase - 2NF (Transitivity A->B B->C). Remove productID items to make it 3NF. 
+    ID -> Everything not below
+    ProductID -> productName,, price, numberOfTickets
+
+
+Question 2: Normalization 
+This exercise is adapted from the textbook of Ramakrishan and Gehrke 
+Suppose you are given a relation R (A, B, C, D). For each of the following sets of functional 
+dependencies (1 to 5 below), assuming that those are the only dependencies that hold for R, do 
+the following: 
+
+a) Identify all candidate keys for R. 
+b) Identify the best normal form that R satisfies (1NF, 2NF, 3NF, BCNF). 
+c) If R is not in 3NF/BCNF, then follow the methodology presented in the lecture to 
+decompose it into a set of 3NF/BCNF relations that preserve the dependencies.  
+Functional dependencies: 
+
+1. 𝐶 →𝐷, 𝐶 →𝐴, 𝐵 → 𝐶 
+2. 𝐵 →𝐶, 𝐷 →𝐴 
+3. 𝐴𝐵𝐶 →𝐷, 𝐷 →𝐴 
+4. 𝐴 →𝐵, 𝐵𝐶 →𝐷, 𝐴 → 𝐶 
+5. 𝐴𝐵 →𝐶, 𝐴𝐵 →𝐷, 𝐶 →𝐴, 𝐷 → 𝐵 
+
+
+2. 𝐵 →𝐶, 𝐷 →𝐴 
+    1NF: B D A C 
+    3NF:    D A  "Because you have the primary key pointing to everything else" 
+            B C  - || -
+            B D  "Together they make a primary key" 
+
+3. 𝐴𝐵𝐶 →𝐷, 𝐷 →𝐴 
+    3NF already BCD-A or ABC-D
+
+4. 𝐴 →𝐵, 𝐵𝐶 →𝐷, 𝐴 → 𝐶
+    CK; A from a you can reach everying 
+    RxY: 
+        R-Y: Remove D, leaving ABC. A-BC, C-a
+        xY: BC-D
+   
+
+

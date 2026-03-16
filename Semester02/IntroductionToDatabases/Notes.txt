@@ -1,0 +1,208 @@
+
+Lecture 1. 
+
+Violates foreign key constraint because key "name: JapanCola" does not exist in the referenced table
+
+// create primary key 
+create table drinks(name string primary key, price int);
+
+// use primary key as foreign key in new table 
+create table personalTaste(person_name string, drink_name string references Drinks(name));
+insert into PersonalTaste('Omar', 'Coffee')
+
+
+Lecture 2. 
+Slides: https://learnit.itu.dk/pluginfile.php/442461/mod_resource/content/5/intro-db-spring2026-lecture2.pdf
+
+ER - Entity-Relationship model 
+Components - slide 8. 
+
+Final Coffee house slide - 24. 
+Entities - look for nouns. (users, produts). square
+Attribute - a description of the entitiy. Elips - slide 12. 
+    - composit - individuall can exist. 
+    - derived - Date of birth dirives age. 
+    - multivalued - holds multiple values. 
+Relationships 
+    - Unary 
+    - Binary: user(square)-purchase(diamond)-product(square)
+    - Ternary: slide 16. With annotations. 
+Cardinality: 
+    - numerical relationshiops slide 18-22
+    - one-to-one . read towareds the entity define both min/max relationship. 
+Weak entities 
+    - the entity and releation ship that are weak (cannot exist without knowing the strong entity)
+    must be drawn with double line. Hotel/room - slide 23. 
+
+Enhanced ER model components: 
+Specialization - Slide 28
+    - Defines a subclass of an entity. Artist = superclass, singer & actor = subclasses
+    - Disjoint ( d ) and overlaps. ( o )
+    - Total vs partial - all entities in are in the subclass or only some. 
+Categorisation
+    - Slide 30
+Aggregation 
+    - Entities combined into higher level entity. 
+
+
+CREATE TABLE Statements - slide 33.  ( data types slide 37 )
+    - Eneities = tables 
+    - Attributes = columns
+    - Key = primary keys. 
+    - Cardinalities = constraints 
+
+create table Product(PName string primary key, price int);
+create table room(name string, number int, primary key(name, number)); // combine both to primary
+Wrong: create table Room(name string reference product(PName), number int primary key);
+
+
+Constraings: (slide 44)
+    - Unique numbers:           slide 42. No attribute value can be the same. 
+    - positive numbers only:    create table positive ( number int check(number >0)); 
+    - default values:           create table zip_codes(name string, zip int default 2300); 
+
+Exercise slides 46-49
+
+
+
+
+Lecture 3 - Normal forms 
+
+Why no anomalies is a good: 
+    - no duplictes
+    - reduce risk of inconsistencies
+    - storage space efficient
+
+Disadvantages: 
+    - if we change the price of a product we would in heinsite not be albe 
+    what the previous turnover would be. 
+    - 
+
+Functional dependencis 
+    - A functional dependency is a relationship between columns
+    in a database table where one column's value determines another column's value.
+    - First example could be: 
+        UserName -> (Email, Password)
+        ProductName -> Price 
+        Day -> Cashier
+    - Ask yourself "how does it work in our system?"
+    because if you have data on what a green tee cost in different stores
+    then product name no longer a functional dependency to price. 
+    There would be 
+    - Green tea     wallmart    5
+    - Green tea     starbucks   7
+
+2NF: Fully functional means that an attribute is fully dependet on a specific attribute. 
+    - Price is fully depdendnet on product name in to FD first example. 
+    
+    tjek: are a non prime attribures depending on candidate keys? 
+
+3NF: - slide 39 - game database, app database. 
+    - Transitive depdendency 
+        - slide 41, Anna and Mhent are both at ITU - Copenhagen - Denmark, the data is therefore repeated. 
+        - slide 42 correctly shows how to divide this. Where there is only one field. A university table on its own. 
+            hence both new tables are in 3rd normal form. 
+            Slide 43 shows a different rule set for checking if we are in 3rd normal form. 
+
+        - ALGORITHM on slide 48 https://learnit.itu.dk/pluginfile.php/442600/mod_resource/content/3/intro-db-spring2026-lecture3.pdf
+        - Note: The problem is on 41 and you want to amek it look like 42. to go from violation of 3rd form, to a correct 3rd form. 
+        - Example: University city is dependnig on zip code. but university city is not depending on university. hence it violates. 
+
+        - Slide 50 shows double violation so splitting twice is even better. (abstract, take time)
+        - slide 52, example 5. 
+
+1NF
+The first normal form (1NF) states that every attribute 
+type of a relation must be atomic and single-valued
+
+2NF
+A relation R is in second normal form (2NF) if it 
+satisfies 1NF and every non-prime attribute type A in R 
+is fully functionally dependent on any key of R.
+
+3NF
+A relation R is in third normal form (3NF) if it satisfies 
+2NF and no non-prime attribute type of R is transitively 
+dependent on the primary key.
+A functional dependency 𝑋 → 𝑌 is a transitive 
+dependency if there is a set of attribute types Z that is 
+neither a candidate key nor a subset of any key of R, 
+and both 𝑋 → 𝑍 and 𝑍 → 𝑌 hold
+
+
+
+lecture 4. 
+
+-- Without the "as priceOfTwo" the name of the column would just be "price * 1.5"
+Select *, price * 1.5 as halfprice as priceOfTwo from Product
+
+create table product (name string, price int); 
+insert into product values ("tea", 100), ("small", 85); 
+select *, price * 1.5 from product;
+
+// converte null to defult constraintsselect *, coalesce ( price, 110) as price_with_default from prodct; 
+
+select * from product where productname in ("small", "large")
+ 
+select * from user where username like "A%";
+select * from user where username not like "A%"; 
+
+select username, purchasetime, productname from pourchase order by username, purchasetime, productname desc; 
+
+select * 
+from product 
+order by price 
+limit 1; 
+
+Common aggregate functions: 
+count
+sum 
+avg     
+min 
+max     - rtm maximum value in column
+
+select (count(disctinct productName)) -- not finished query, but would return the amount of diffferent procuct names. slide 34
+
+select count(*), count(price), min(price), max(price) from product;
+
+-- how many product did each ccust buy, output most freq cust first
+select username, 
+count(*) as count 
+from purchase
+group by username
+order by count desc; 
+
+martin  3
+omar    2 
+
+-- Nesting subqueries 
+select * from pruchase 
+where productname in 
+    (select productname from product where price = 100); 
+
+-- live exercise 
+select * 
+from product 
+where price = 
+    (select min(price) from product)
+order by productname; 
+
+-- output: small     85 
+
+-- look at slide 43. 
+
+
+-- multi-relation queries "joins"  (join, left outer join)
+--purchases with email addresses 
+select purchase.*, email 
+from purchase, userwhere purchase.username = user.username
+
+
+
+-- revenue per day 
+select purchasetime::data as day, sum(price) as revenuefrom purchase join product 
+on purchas
+
+
+ -- takeaways on last slide. 
+ 

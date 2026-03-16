@@ -1,0 +1,19 @@
+
+Bogen bygger på tre principper:
+
+First Way — Flow: Arbejdet skal flyde hurtigt fra Development til Operations til kunden. 
+Det kræver at gøre arbejdet synligt (kanban-boards), begrænse WIP, reducere batch-størrelser, 
+færre handoffs og identificere flaskehalse løbende.
+
+Second Way — Feedback: Hurtig feedback fra højre mod venstre i value streamen. Problemer skal 
+opdages og sværmes (swarmed) med det samme — ligesom Toyotas Andon-snor. Kvalitet skal bygges 
+ind fra starten, ikke kontrolleres bagefter.
+
+Third Way — Continual Learning: Skab en high-trust kultur hvor fejl bruges til læring frem 
+for bebrejdelse. Blameless post-mortems, lokal viden konverteres til global forbedring, og 
+systemer stresses bevidst for at øge robusthed (Netflix "Chaos Monkey").
+
+
+
+What is Ansible | Ansible Playbook explained | Ansible Tutorial for Beginners: 
+
