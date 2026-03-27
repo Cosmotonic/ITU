@@ -227,4 +227,10 @@ select points,
 sum(points) over(rows between 1 preceding and 1 following) as we 
 from results;
 
--- Always use ORDER BY with window functions. 
+-- Always use ORDER BY with window functions. '
+
+INSERT INTO product (productname, description, price)
+VALUES 
+    ('Espresso', 'Strong black coffee', 35),
+    ('Latte', 'Espresso with steamed milk', 45),
+    ('Cappuccino', 'Espresso with foam', 45);
