@@ -165,3 +165,6 @@ CREATE TABLE gmail_users AS                                 -- opret ny tabel fr
 
 DROP TABLE gmail_users;                                     -- slet tabel
 ```
+
+
+Upload your SSH public key in DigitalOcean>Settings>Security
