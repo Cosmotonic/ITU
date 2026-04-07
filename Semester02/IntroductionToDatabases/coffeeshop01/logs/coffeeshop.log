@@ -1,0 +1,25 @@
+2026-03-20 13:26:08 [coffeeshop] [INFO] Static file handler added: StaticFileConfig(hostedPath=/, directory=/, location=CLASSPATH, precompressMaxSize=-1, aliasCheck=null, headers={Cache-Control=max-age=0}, skipFileFunction=null, mimeTypes={}, roles=[]). File system location: '[file:///C:/ITU/Semester02/IntroductionToDatabases/lecture6/introdb-coffeeshop/target/classes/, jar:file:///C:/Users/conta/.m2/repository/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar!/META-INF/versions/9/, jar:file:///C:/Users/conta/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/2.2.20/kotlin-stdlib-2.2.20.jar!/META-INF/versions/9/]'
+2026-03-20 13:26:08 [coffeeshop] [INFO] Starting Javalin ...
+2026-03-20 13:26:08 [coffeeshop] [INFO] jetty-12.1.6; built: 2026-01-27T18:53:19.182Z; git: 88ca559572b1c8858b3c5684bb0293fa64e5e90f; jvm 21.0.8+9-LTS
+2026-03-20 13:26:08 [coffeeshop] [INFO] Session workerName=node0
+2026-03-20 13:26:08 [coffeeshop] [INFO] Started oeje10s.ServletContextHandler@1088527{ROOT,/,b=null,a=AVAILABLE,h=oeje10s.SessionHandler@3d2c2525{STARTED}}
+2026-03-20 13:26:08 [coffeeshop] [INFO] Started oeje10s.ServletContextHandler@1088527{ROOT,/,b=null,a=AVAILABLE,h=oeje10s.SessionHandler@3d2c2525{STARTED}}
+2026-03-20 13:26:08 [coffeeshop] [INFO] Started oejs.ServerConnector@5b3a1644{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2026-03-20 13:26:08 [coffeeshop] [INFO] Started oejs.Server@51da245d{STARTING}[12.1.6,sto=0] @106ms
+2026-03-20 13:26:08 [coffeeshop] [INFO] 
+       __                  ___          _____
+      / /___ __   ______ _/ (_)___     /__  /
+ __  / / __ `/ | / / __ `/ / / __ \      / /
+/ /_/ / /_/ /| |/ / /_/ / / / / / /     / /
+\____/\__,_/ |___/\__,_/_/_/_/ /_/     /_/
+
+       https://javalin.io/documentation
+
+2026-03-20 13:26:08 [coffeeshop] [INFO] Javalin started in 156ms \o/
+2026-03-20 13:26:08 [coffeeshop] [INFO] Listening on http://localhost:8080/
+2026-03-20 13:26:08 [coffeeshop] [INFO] You are running Javalin 7.0.0 (released February 22, 2026).
+2026-03-20 13:26:20 [coffeeshop] [INFO] User 'kasla' logged in
+2026-03-20 13:26:23 [coffeeshop] [INFO] User 'kasla' purchased 'Tea'
+2026-03-20 13:27:36 [coffeeshop] [INFO] User 'kasla' purchased 'Small'
+2026-03-20 13:27:39 [coffeeshop] [INFO] User 'kasla' purchased 'Large'
+2026-03-20 13:27:50 [coffeeshop] [INFO] User 'kasla' purchased 'Fancy'
