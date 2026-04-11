@@ -8,6 +8,21 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.OutputStreamWriter;
 
+
+// NOTES: 
+// treeSet.removeAll(otherSet); // fjern elementer der er i begge
+
+/*
+Et HashMap er hashed, ikke indexeret. Nøglen bliver kørt gennem en hashfunktion 
+der bestemmer hvilken bucket den lander i — men den bucket har ingen meningsfuld 
+relation til nabobukketsne. Der er ingen rækkefølge.
+Et array er indexeret — element 5 ligger fysisk ved siden af element 6 i hukommelsen.
+Et RBBST er hverken indexeret eller hashed — det er ordnet via sammenligninger, 
+hvilket er præcis det der giver dig range queries og min/max gratis.
+
+*/
+
+
 public class flights {
 
     public record FlightInfo(int flightTimeSeconds, String destination) implements Comparable<FlightInfo> {

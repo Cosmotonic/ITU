@@ -4,6 +4,9 @@
 
 Målet med øvelsen er at bygge en **pålidelig webservice** — én der ikke går ned selvom en enkelt server eller container crasher, og som kan håndtere mange brugere samtidig.
 
+Alle workers er aktive hele tiden, load balanceren fordeler requests mellem dem, og hvis én går ned fortsætter den anden uden afbrydelse for brugeren.
+Det er hele pointen med opsætningen — høj tilgængelighed og kapacitet på samme tid, ikke en reserve der venter i kulissen.
+
 Det opnår vi med **Docker Swarm**: et system der koordinerer flere servere som én samlet enhed. En server er **manager** (hjernen der beslutter hvad der sker) og resten er **workers** (musklerne der rent faktisk kører containers).
 
 ---
