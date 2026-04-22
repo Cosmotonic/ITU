@@ -1,3 +1,29 @@
+
+# Industry Standard Architecture (3 Managers + 2 Workers) (A node gets a routingmesh when its added to a swarm)
+This setup utilizes your three managers to also run application workloads to maximize resource efficiency.
+
+Flow Description
+Nodes 1, 2 & 3 (Managers + Workers): Run your Svelte (Frontend) and Java (Backend) containers as replicated services.
+
+Node 4 (Worker): Dedicated to the Database. It is locked here using a placement constraint to ensure stable disk performance.
+
+Node 5 (Worker): Dedicated to Grafana. It is kept isolated so heavy graphing tasks do not steal CPU from your Java backend.
+
+Traffic Path (Step-by-step)
+Internet → DigitalOcean Load Balancer (Handles HTTPS termination).
+
+Load Balancer → Port 80 on any random Node (1, 2, or 3).
+
+Routing Mesh → Routes traffic internally to the NGINX container (running on Node 1, 2, or 3).
+
+NGINX → Inspects the path (/api) and forwards the packet to the correct Java container.
+
+# #######################################################
+
+
+
+
+
 # Docker Swarm — Noter og Ordbog
 
 ## Hvad handler det om?

@@ -139,4 +139,39 @@ from 'C:/ITU/Semester02/IntroductionToDatabases/Lecture10/laureates.json';
 
 /* Indexes and Min/Max Summaries (10 points)  */
 
+-- In row group 1, 'Cheese' falls within the range $[Apples, Milk]$. In row group 3, 'Cheese' is
+-- explicitly within the range $[Bread, Cheese]$. Row groups 2 and 4 can be safely skipped 
+-- because 'Cheese' falls outside their alphabetical boundaries.
+
+-- Row group 1
+-- Row group 3
+
 https://learnit.itu.dk/pluginfile.php/446237/mod_resource/content/2/Homework%204.pdf
+
+
+/*
+ANALYSE AF JOIN-IMPLEMENTERINGER (SPØRGSMÅL 19)
+
+* a. SQL database systems can be built using any join implementation.
+Status: KORREKT. Forklaring: SQL er et deklarativt sprog, der definerer "hvad" der skal hentes, ikke "hvordan". 
+Implementeringen af join-logikken er op til database-motoren. En database kan i teorien køre med kun én 
+type join, selvom de fleste moderne systemer implementerer flere for at optimere ydeevnen.
+
+* b. Hash joins make use of hash functions, which have near-constant insertion and lookup times.
+Status: KORREKT. Forklaring: Hash-funktioner muliggør gennemsnitlig konstant tid, O(1), for både 
+indsættelse og opslag i en hash-tabel. Dette gør Hash Joins meget effektive til store datamængder, 
+da man hurtigt kan finde matchende rækker uden at gennemløbe hele tabellen.
+
+* c. The performance of the sort-merge join is dominated by the merge phase.
+Status: FORKERT. Forklaring: Ydeevnen domineres af sorteringsfasen. Sortering 
+af to tabeller med henholdsvis N og M rækker har en tidskompleksitet 
+på O(N log N + M log M). Selve flettedelen (merge-fasen) er lineær, O(N + M), 
+og er derfor den mindst krævende del af processen.
+
+* d. Nested-loop joins have a quadratic runtime.
+Status: KORREKT. Forklaring: En basal Nested-loop join sammenligner hver række fra
+den ydre tabel med hver række i den indre tabel. Hvis begge tabeller har størrelsen n,
+resulterer det i n * n sammenligninger, hvilket svarer til en kvadratisk tidskompleksitet på O(n^2).
+
+KONKLUSION: De korrekte svarmuligheder er a, b og d.
+*/

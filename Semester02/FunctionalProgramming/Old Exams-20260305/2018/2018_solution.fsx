@@ -1,7 +1,7 @@
 
 
 // Question 1. 
-// Question 1. 
+// Question 1. (Polymorphic - a data type is undeclared yet. )
 type Heap<'a when 'a: equality> =
     | EmptyHP
     | HP of 'a * Heap<'a> * Heap<'a>
@@ -37,6 +37,8 @@ let empty : Heap<'a> = EmptyHP
 
 exception HeapError of string
 
+// raide (HeapError("there is an error"))
+
 // Explaination: In F# you can define custom exceptions using the exception keyword. By writing of string we give the exception 
 // a field that carries a text message. It can then be raised with e.g. raise (HeapError "something went wrong").
 
@@ -54,6 +56,9 @@ let isEmpty (h : Heap<'a>) : bool =
     | _ -> false
 
 isEmpty ex3
+
+let isEmpty_alternative h = 
+    h = empty; 
 
 //  Explaination: The function uses pattern matching to distinguish between the two constructors of the Heap type.
 //  If the heap matches EmptyHP it returns true. The underscore _ catches all other 
@@ -79,7 +84,7 @@ size ex3
 let find (h : Heap<'a>) : 'a =
     match h with
     | EmptyHP -> raise (HeapError "find: empty heap")
-    | HP(v, _, _) -> v
+    | HP(v', _, _) -> v'
 
 find ex3
 
@@ -100,8 +105,9 @@ let rec chkHeapProperty (h : Heap<'a>) : bool =
     | HP(v, l, r) ->
         (l = EmptyHP || v <= find l) &&
         (r = EmptyHP || v <= find r) &&
-        chkHeapProperty l &&
-        chkHeapProperty r
+        chkHeapProperty l && chkHeapProperty r 
+
+chkHeapProperty ex3
 
 // Explaination: The heap property states that a node must always be less than or equal to its children. 
 // For each non-empty node with value v we therefore check: is v less than or equal to the value of the 
@@ -124,6 +130,8 @@ let rec map (f : 'a -> 'b) (h : Heap<'a>) : Heap<'b> =
     match h with
     | EmptyHP -> EmptyHP
     | HP(v, l, r) -> HP(f v, map f l, map f r)
+
+// Next assignment runs the code. 
 
 // The function traverses the tree in pre-order — meaning we apply f to the root first, then recursively 
 // to the left subtree, then the right subtree. This choice is natural because our datatype is defined as 
@@ -197,7 +205,7 @@ let split (xs : 'a list) : 'a list * 'a list =
     let half = n / 2
     (List.take half xs, List.skip half xs)
 
-split [1;2;3;4] // = ([1;2], [3;4])
+split [1;2;3;4;5;6] // = ([1;2], [3;4])
 
 // Explaination: We find the length of the list, divide by 2 (integer division, rounds down), 
 // and use List.take and List.skip to cut the list at that point. List.take half 
@@ -215,6 +223,7 @@ let indivisible (xs : 'a list) : bool =
     | [_] -> true
     | _ -> false
 
+let indivisible_alternative xs = size xs < 2 
 
 // Explaination: A list with zero or one element is by definition sorted — there is nothing to compare or swap. 
 // The function uses pattern matching to distinguish between the three cases: empty list, list with exactly 
@@ -239,7 +248,7 @@ let rec merge (xs : 'a list, ys : 'a list) : 'a list =
         else y :: merge (xs, yrest)
 
 merge ([], [1;2;3]) // = [1;2;3]
-merge ([1;3;5], [2;4;6]) // = [1;2;3;4;5;6]
+merge ([1;2;5], [3;4;6]) // = [1;2;3;4;5;6]
 
 // We compare the two front elements x and y. If x is less than or equal to y, 
 // x is placed at the front of the result list. We then call merge again with the rest of xs (xrest) 
@@ -256,8 +265,7 @@ merge ([1;3;5], [2;4;6]) // = [1;2;3;4;5;6]
 
 let divideAndConquer split merge indivisible p =
     let rec dc p =
-        if indivisible p
-        then p
+        if indivisible p then p
         else
             let (left, right) = split p
             merge (dc left, dc right)
@@ -519,3 +527,5 @@ let reduceEx03 = reduceMove substEx03
 // directly to the coordinates. This way all Move constructors are eliminated and positions
 // are updated in place. Label and Ref should not appear (we call this after substFigRefs)
 // so we raise a FigError if they do.
+
+

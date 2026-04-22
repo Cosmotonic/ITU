@@ -33,3 +33,5 @@ SELECT rank() OVER (ORDER BY total_power DESC) AS power_rank, *
 FROM turbine_sums
 ORDER BY power_rank, turbine_id;
 
+
+
