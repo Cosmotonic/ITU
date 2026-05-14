@@ -1,0 +1,138 @@
+raceId,boatName,place,maxSpeed,ownerName
+1,Soggy Bottom,1,6.65,Elias Andersson
+1,Ocean Breeze,2,8.07,Isabella Johansson
+1,Nauti Buoy,3,8.62,Oscar Johansson
+1,Knot on Call,4,6.69,Alice Sørensen
+1,The Codfather,5,7.14,Liam Andersson
+1,Seas the Day,6,10.25,Emma Johansson
+1,Pier Pressure,7,9.12,Oscar Sørensen
+2,Wave Rider,1,7.88,Noah Andersson
+2,Boat Drinks,2,10.32,James Larsen
+2,Ocean Breeze,3,9.04,Leo Johansson
+2,Pier Pressure,4,8.45,Mia Nielsen
+2,Seas the Day,5,10.18,Alice Andersson
+2,Nauti Buoy,6,6.76,Mia Sørensen
+3,Seas the Day,1,8.58,Alice Rasmussen
+3,Nauti Buoy,2,9.64,Isabella Jensen
+3,Boat Drinks,3,8.79,Elias Nielsen
+3,Knot on Call,4,10.05,Oscar Johansson
+3,Soggy Bottom,5,8.84,Freja Rasmussen
+3,Pier Pressure,6,7.02,Olivia Andersson
+3,The Codfather,7,7.7,Astrid Jørgensen
+3,Wave Rider,8,9.8,Isabella Pedersen
+4,Aquaholic,1,6.88,Liam Andersson
+4,Nauti Buoy,2,7.47,Ella Andersson
+4,Pier Pressure,3,9.67,Oliver Larsen
+4,Boat Drinks,4,6.44,Mia Larsen
+4,Ocean Breeze,5,11.32,Alice Sørensen
+5,Boat Drinks,1,11.36,Oliver Sørensen
+5,The Codfather,2,11.31,Oliver Jørgensen
+5,Pier Pressure,3,8.55,Ava Pedersen
+5,Ocean Breeze,4,10.82,Leo Rasmussen
+5,Knot on Call,5,9.11,Liam Jensen
+5,Soggy Bottom,6,9.34,Noah Andersson
+6,Seas the Day,1,8.68,Ava Johansson
+6,The Codfather,2,10.46,Ella Andersson
+6,Wave Rider,3,8.7,Oliver Jensen
+6,Boat Drinks,4,7.48,Astrid Nielsen
+6,Aquaholic,5,7.66,Oliver Jørgensen
+6,Nauti Buoy,6,9.13,Astrid Johansson
+6,Knot on Call,7,7.44,Elias Jensen
+6,Pier Pressure,8,6.46,James Nielsen
+7,Nauti Buoy,1,6.9,Lucas Rasmussen
+7,Wave Rider,2,10.16,Freja Johansson
+7,Knot on Call,3,7.28,Mia Larsen
+7,Pier Pressure,4,8.45,Oscar Rasmussen
+7,Soggy Bottom,5,8.8,Liam Pedersen
+7,Ocean Breeze,6,7.24,Mia Sørensen
+8,Pier Pressure,1,11.12,Mia Sørensen
+8,Soggy Bottom,2,9.23,Freja Rasmussen
+8,Boat Drinks,3,9.28,Hugo Hansen
+8,Aquaholic,4,11.39,Ella Hansen
+8,Knot on Call,5,7.32,Elias Andersson
+8,Seas the Day,6,8.91,Lucas Jørgensen
+8,Nauti Buoy,7,8.02,Leo Nielsen
+8,Ocean Breeze,8,10.79,Freja Pedersen
+9,The Codfather,1,9.98,Olivia Andersson
+9,Seas the Day,2,9.86,Noah Hansen
+9,Soggy Bottom,3,11.2,Ava Larsen
+9,Aquaholic,4,6.3,Lucas Sørensen
+9,Nauti Buoy,5,7.96,Elias Larsen
+9,Wave Rider,6,7.96,Oliver Hansen
+10,Nauti Buoy,1,9.24,Isabella Jørgensen
+10,Boat Drinks,2,7.35,Liam Sørensen
+10,Pier Pressure,3,10.69,Astrid Larsen
+10,Knot on Call,4,6.24,Emma Sørensen
+10,Soggy Bottom,5,11.7,William Andersson
+10,Aquaholic,6,11.04,Hugo Jørgensen
+10,Wave Rider,7,6.91,Noah Jensen
+10,Seas the Day,8,8.84,Olivia Jørgensen
+11,The Codfather,1,11.78,Freja Nielsen
+11,Nauti Buoy,2,6.69,Ava Andersson
+11,Wave Rider,3,11.79,Olivia Sørensen
+11,Ocean Breeze,4,9.47,James Jørgensen
+11,Knot on Call,5,9.45,Lucas Larsen
+11,Pier Pressure,6,8.38,Freja Nielsen
+12,Ocean Breeze,1,10.83,Alice Hansen
+12,Aquaholic,2,10.7,Isabella Rasmussen
+12,Pier Pressure,3,9.2,Astrid Jørgensen
+12,Wave Rider,4,8.22,Ella Jørgensen
+12,Seas the Day,5,9.89,Emma Nielsen
+12,Nauti Buoy,6,11.1,Ella Pedersen
+13,Boat Drinks,1,8.61,Freja Sørensen
+13,Wave Rider,2,9.13,Astrid Larsen
+13,The Codfather,3,7.62,Oscar Sørensen
+13,Knot on Call,4,10.65,Elias Jørgensen
+13,Ocean Breeze,5,8.61,Freja Sørensen
+14,Wave Rider,1,9.42,Leo Andersson
+14,Aquaholic,2,8.27,Emma Sørensen
+14,Ocean Breeze,3,8.97,Isabella Nielsen
+14,Seas the Day,4,7.09,William Hansen
+14,Knot on Call,5,8.13,Sophia Larsen
+14,The Codfather,6,8.04,Hugo Jensen
+14,Pier Pressure,7,10.21,James Johansson
+15,Knot on Call,1,8.44,Alice Jensen
+15,Aquaholic,2,10.55,Leo Larsen
+15,Ocean Breeze,3,8.86,Freja Jensen
+15,The Codfather,4,8.94,Emma Hansen
+15,Wave Rider,5,6.56,William Larsen
+16,Aquaholic,1,11.98,Alice Johansson
+16,Nauti Buoy,2,7.98,Leo Jørgensen
+16,Wave Rider,3,8.72,James Rasmussen
+16,Pier Pressure,4,7.51,Noah Johansson
+16,Knot on Call,5,10.33,Isabella Johansson
+16,The Codfather,6,6.72,Oscar Sørensen
+16,Seas the Day,7,11.71,Leo Larsen
+16,Ocean Breeze,8,7.11,William Pedersen
+17,Nauti Buoy,1,7.08,Emma Nielsen
+17,Knot on Call,2,10.25,Noah Jensen
+17,Pier Pressure,3,7.65,Liam Nielsen
+17,Soggy Bottom,4,9.32,Leo Rasmussen
+17,Ocean Breeze,5,11.66,Astrid Nielsen
+17,Seas the Day,6,11.21,Ella Pedersen
+17,Wave Rider,7,6.62,Emma Nielsen
+17,Aquaholic,8,9.44,Ella Johansson
+18,The Codfather,1,8.4,Liam Rasmussen
+18,Wave Rider,2,9.46,Leo Pedersen
+18,Seas the Day,3,6.32,Noah Rasmussen
+18,Soggy Bottom,4,10.87,James Sørensen
+18,Pier Pressure,5,6.51,Sophia Nielsen
+18,Aquaholic,6,6.71,Oliver Pedersen
+18,Boat Drinks,7,8.5,Hugo Jensen
+18,Nauti Buoy,8,10.74,William Sørensen
+19,The Codfather,1,9.73,Hugo Larsen
+19,Pier Pressure,2,11.76,Olivia Pedersen
+19,Nauti Buoy,3,11.69,William Nielsen
+19,Boat Drinks,4,9.75,Sophia Sørensen
+19,Knot on Call,5,9.96,Ava Johansson
+19,Aquaholic,6,7.44,Alice Andersson
+19,Seas the Day,7,6.45,Emma Johansson
+19,Wave Rider,8,8.45,Leo Larsen
+20,Nauti Buoy,1,10.12,Sophia Sørensen
+20,Soggy Bottom,2,10.73,Astrid Johansson
+20,Aquaholic,3,9.54,William Johansson
+20,Seas the Day,4,8.55,Oscar Jørgensen
+20,Wave Rider,5,7.35,Noah Rasmussen
+20,Boat Drinks,6,11.45,Noah Larsen
+20,The Codfather,7,6.43,Ava Jensen
+20,Knot on Call,8,10.76,Hugo Jensen

@@ -1,4 +1,5 @@
 public class test {
+<<<<<<< HEAD
 
 
     public static void main(String[] args) {
@@ -7,3 +8,7 @@ public class test {
         
     }
 }
+=======
+    
+}
+>>>>>>> 536084053780a867b82ca996f3d1750a81a7e276

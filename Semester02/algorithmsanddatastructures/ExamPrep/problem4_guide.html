@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problem 4 — Pattern Recognition Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Fraunces:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f11;
+    --surface: #18181c;
+    --border: #2a2a32;
+    --text: #e8e4dc;
+    --muted: #6b6875;
+    --bfs: #4ade80;
+    --dijkstra: #fb923c;
+    --uf: #a78bfa;
+    --dag: #38bdf8;
+    --sim: #f472b6;
+    --accent: #e8c547;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.65;
+    padding: 2.5rem 1.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+  header .eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--muted); }
+  .subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Algorithm tags */
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.55rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .tag.bfs { background: #4ade8022; color: var(--bfs); border: 1px solid #4ade8044; }
+  .tag.dijkstra { background: #fb923c22; color: var(--dijkstra); border: 1px solid #fb923c44; }
+  .tag.uf { background: #a78bfa22; color: var(--uf); border: 1px solid #a78bfa44; }
+  .tag.dag { background: #38bdf822; color: var(--dag); border: 1px solid #38bdf844; }
+  .tag.sim { background: #f472b622; color: var(--sim); border: 1px solid #f472b644; }
+
+  /* Decision tree */
+  .decision-tree {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    margin: 1.2rem 0;
+  }
+  .decision-tree .q {
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .decision-tree .branch {
+    margin-left: 1.4rem;
+    border-left: 2px solid var(--border);
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .decision-tree .answer {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text);
+  }
+  .decision-tree .arrow {
+    color: var(--muted);
+    margin-right: 0.4rem;
+  }
+
+  /* Exam table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.85rem;
+  }
+  th {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #ffffff04; }
+  .year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .scenario { color: var(--text); }
+  .tags-cell { white-space: nowrap; }
+  .tags-cell .tag + .tag { margin-left: 4px; }
+
+  /* Algorithm reference cards */
+  .algo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .algo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem;
+  }
+  .algo-card .algo-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .algo-card.bfs .algo-name { color: var(--bfs); }
+  .algo-card.dijkstra .algo-name { color: var(--dijkstra); }
+  .algo-card.uf .algo-name { color: var(--uf); }
+  .algo-card.dag .algo-name { color: var(--dag); }
+  .algo-card.sim .algo-name { color: var(--sim); }
+  .algo-card p {
+    font-size: 0.82rem;
+    color: #b8b4b0;
+    margin: 0.25rem 0;
+  }
+  .algo-card .complexity {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    margin-top: 0.6rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Callout */
+  .callout {
+    background: #e8c54710;
+    border: 1px solid #e8c54740;
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin: 1.2rem 0;
+  }
+  .callout strong { color: var(--accent); }
+  .callout p { margin: 0.3rem 0; font-size: 0.9rem; }
+
+  /* Modeling checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 0.45rem 0 0.45rem 2rem;
+    position: relative;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "→";
+    position: absolute;
+    left: 0.5rem;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+  }
+
+  footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">ITU Algorithms · Exam Prep</div>
+  <h1>Problem 4 <em>Pattern Recognition</em></h1>
+  <div class="subtitle">Built from 20 real exam sets · 2011–2023</div>
+</header>
+
+<!-- THE BIG INSIGHT -->
+<div class="callout">
+  <p><strong>The one rule:</strong> You never invent a new algorithm. You translate the story into a graph (or other structure), pick the right known algorithm, and state the running time.</p>
+  <p>The exam says it every time: <em>"use existing algorithms and data structures as much as you can."</em></p>
+</div>
+
+<!-- DECISION TREE -->
+<h2>Step 1 — Pick your algorithm</h2>
+<div class="decision-tree">
+  <div class="q">Are all edges the same cost / just counting steps?</div>
+  <div class="branch">
+    <span class="arrow">YES →</span> <span class="answer">Use <span class="tag bfs">BFS</span> — gives shortest path in unweighted graphs. O(V+E).</span>
+  </div>
+  <div class="branch">
+    <span class="arrow">NO, edges have different weights (all ≥ 0) →</span> <span class="answer">Use <span class="tag dijkstra">Dijkstra</span>. O((V+E) log V).</span>
+  </div>
+
+  <br>
+  <div class="q">Are you asking "are A and B connected?" or "do they share a group?"</div>
+  <div class="branch">
+    <span class="arrow">YES →</span> <span class="answer">Use <span class="tag uf">Union-Find</span>. O(α(N)) per operation ≈ constant.</span>
+  </div>
+
+  <br>
+  <div class="q">Is there a forced ordering (prerequisites, increasing sequence, topological structure)?</div>
+  <div class="branch">
+    <span class="arrow">YES →</span> <span class="answer">Build a <span class="tag dag">DAG</span> and use DAG Shortest Paths. O(V+E).</span>
+  </div>
+
+  <br>
+  <div class="q">Is it about simulating a process (fire spreading, juggling, game turns)?</div>
+  <div class="branch">
+    <span class="arrow">YES →</span> <span class="answer"><span class="tag sim">Simulate</span> directly, often with a priority queue or queue. O depends on problem.</span>
+  </div>
+</div>
+
+<!-- THE TYPICAL STRUCTURE -->
+<h2>Step 2 — Recognize the sub-question pattern</h2>
+<div class="decision-tree">
+  <p style="color: var(--text); margin-bottom: 1rem;">Problem 4 almost always has 2–3 sub-questions that build on each other:</p>
+  <div class="branch" style="border-color: var(--bfs);">
+    <div class="answer"><strong style="color:var(--bfs)">Part a — Simplified version.</strong> "Assume unit weights" / "assume it's a straight line" / "assume all costs are 1."</div>
+    <div class="answer" style="color: var(--muted); font-size: 0.75rem; margin-top: 0.3rem;">→ Almost always: <span class="tag bfs">BFS</span> or even a direct O(N) scan.</div>
+  </div>
+  <br>
+  <div class="branch" style="border-color: var(--dijkstra);">
+    <div class="answer"><strong style="color:var(--dijkstra)">Part b — Add weights / generalize.</strong> "Now each edge has a cost" / "now the grid is not flat."</div>
+    <div class="answer" style="color: var(--muted); font-size: 0.75rem; margin-top: 0.3rem;">→ Almost always: <span class="tag dijkstra">Dijkstra</span>.</div>
+  </div>
+  <br>
+  <div class="branch" style="border-color: var(--uf);">
+    <div class="answer"><strong style="color:var(--uf)">Part c — Structural twist.</strong> "Now find the minimum X such that..." or "now the graph is a tree" or "describe a faster algorithm."</div>
+    <div class="answer" style="color: var(--muted); font-size: 0.75rem; margin-top: 0.3rem;">→ Could be: <span class="tag dag">DAG SP</span>, <span class="tag uf">Union-Find</span>, binary search + connectivity, or same algo + smarter graph.</div>
+  </div>
+</div>
+
+<!-- GRAPH MODELING -->
+<h2>Step 3 — Model the graph</h2>
+<p style="margin-bottom: 0.8rem; color: #b8b4b0; font-size: 0.88rem;">Once you know the algorithm, you need to describe the graph. Answer these three questions:</p>
+<ul class="checklist">
+  <li><strong>What are the vertices?</strong> — Usually: each cell in a grid, each position/state, each person/location.</li>
+  <li><strong>What are the edges?</strong> — Usually: you can move between adjacent cells, or take one action to go from one state to another.</li>
+  <li><strong>What is the edge weight?</strong> — The cost or time of making that move. If everything costs 1: BFS. If costs vary: Dijkstra.</li>
+  <li><strong>Is the graph directed or undirected?</strong> — If you can go both ways on every edge: undirected. If movement has a direction: directed.</li>
+  <li><strong>How many V and E?</strong> — State this in terms of the problem's parameters (n, r, c, etc.) — this is what determines the running time.</li>
+</ul>
+
+<!-- ALGORITHM QUICK REFERENCE -->
+<h2>Algorithm quick reference</h2>
+<div class="algo-grid">
+  <div class="algo-card bfs">
+    <div class="algo-name">BFS</div>
+    <p>Use when: all edges cost 1 (or 0/1 weights).</p>
+    <p>Gives: shortest path by number of steps.</p>
+    <p>Data structure: Queue (FIFO).</p>
+    <div class="complexity">Time: O(V + E)</div>
+  </div>
+  <div class="algo-card dijkstra">
+    <div class="algo-name">Dijkstra</div>
+    <p>Use when: edges have non-negative weights.</p>
+    <p>Gives: shortest weighted path from source.</p>
+    <p>Data structure: Min-priority queue.</p>
+    <div class="complexity">Time: O((V+E) log V)</div>
+  </div>
+  <div class="algo-card uf">
+    <div class="algo-name">Union-Find</div>
+    <p>Use when: you need to track connected components.</p>
+    <p>Gives: "are u and v connected?" in near-constant time.</p>
+    <p>Use with: Kruskal's MST, infection spreading.</p>
+    <div class="complexity">Time: O(α(N)) per op ≈ O(1)</div>
+  </div>
+  <div class="algo-card dag">
+    <div class="algo-name">DAG Shortest Path</div>
+    <p>Use when: graph has no cycles (forced ordering).</p>
+    <p>Gives: shortest path faster than Dijkstra.</p>
+    <p>Method: topological sort + relax in order.</p>
+    <div class="complexity">Time: O(V + E)</div>
+  </div>
+  <div class="algo-card sim">
+    <div class="algo-name">All-pairs / multi-source</div>
+    <p>Run BFS or Dijkstra from every vertex.</p>
+    <p>Use when: you need distances between all pairs.</p>
+    <p>Examples: Wiener index, graph diameter, graph center.</p>
+    <div class="complexity">Time: O(V·(V+E)) or O(V·(V+E) log V)</div>
+  </div>
+</div>
+
+<!-- EXAM HISTORY TABLE -->
+<h2>All 20 problem 4s — what they asked</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Exam</th>
+      <th>Scenario</th>
+      <th>Algorithm(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="year">2023 May</td>
+      <td class="scenario">Grid of lakes, weighted edges (height diff). Find lake minimising max distance to all others.</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag sim">all-pairs</span></td>
+    </tr>
+    <tr>
+      <td class="year">2022 Aug</td>
+      <td class="scenario">Berlin city graph. Find shortest path with temperature constraints (max T, then bitonic, then DAG).</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag dag">DAG SP</span></td>
+    </tr>
+    <tr>
+      <td class="year">2022 May</td>
+      <td class="scenario">Juggling robot with fireworks. Simulate when globes explode using sequence of catches.</td>
+      <td class="tags-cell"><span class="tag sim">Simulate</span></td>
+    </tr>
+    <tr>
+      <td class="year">2019 Aug</td>
+      <td class="scenario">Grid of water/grass/lava. Lower water level to connect all grass tiles. Binary search + Union-Find.</td>
+      <td class="tags-cell"><span class="tag uf">Union-Find</span> <span class="tag dijkstra">Dijkstra</span></td>
+    </tr>
+    <tr>
+      <td class="year">2019 May</td>
+      <td class="scenario">Fire spreading on grid (hex tiles). When does the house catch fire? Alice escaping fire.</td>
+      <td class="tags-cell"><span class="tag bfs">BFS</span> <span class="tag dijkstra">Dijkstra</span></td>
+    </tr>
+    <tr>
+      <td class="year">2018 Aug</td>
+      <td class="scenario">Diameter of graph. (a) general, (b) unit weights, (c) tree.</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag bfs">BFS</span> <span class="tag sim">all-pairs</span></td>
+    </tr>
+    <tr>
+      <td class="year">2018 May</td>
+      <td class="scenario">Wiener index: sum of all pairwise distances in a molecule graph.</td>
+      <td class="tags-cell"><span class="tag bfs">BFS</span> <span class="tag sim">all-pairs</span></td>
+    </tr>
+    <tr>
+      <td class="year">2017 Aug</td>
+      <td class="scenario">Build cheapest wall on grid (connect Pacific to Atlantic). (a) weighted → Dijkstra, (b) unit → BFS.</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag bfs">BFS</span></td>
+    </tr>
+    <tr>
+      <td class="year">2017 May</td>
+      <td class="scenario">Sheriff kills most exciting monster. (a) linear street, (b) city graph → Dijkstra.</td>
+      <td class="tags-cell"><span class="tag sim">Scan</span> <span class="tag dijkstra">Dijkstra</span></td>
+    </tr>
+    <tr>
+      <td class="year">2016 Aug</td>
+      <td class="scenario">Pokémon: (a) check all 151 species collected, (b) reach Charmander within 60 min.</td>
+      <td class="tags-cell"><span class="tag sim">HashSet</span> <span class="tag dijkstra">Dijkstra</span></td>
+    </tr>
+    <tr>
+      <td class="year">2016 May</td>
+      <td class="scenario">Road map: can car of speed s travel from f to t? Minimum distance? Slowest car connecting all cities?</td>
+      <td class="tags-cell"><span class="tag bfs">BFS</span> <span class="tag dijkstra">Dijkstra</span> <span class="tag uf">MST/UF</span></td>
+    </tr>
+    <tr>
+      <td class="year">2015 Aug</td>
+      <td class="scenario">Knight's tour reachability on N×M board.</td>
+      <td class="tags-cell"><span class="tag bfs">BFS</span></td>
+    </tr>
+    <tr>
+      <td class="year">2015 May</td>
+      <td class="scenario">Snakes and Ladders: simulate die rolls; find minimum die rolls to win.</td>
+      <td class="tags-cell"><span class="tag sim">Simulate</span> <span class="tag bfs">BFS</span></td>
+    </tr>
+    <tr>
+      <td class="year">2014 Aug</td>
+      <td class="scenario">Course prerequisites: output courses to take in order to reach Algorithmic Exobiology.</td>
+      <td class="tags-cell"><span class="tag dag">DAG / Topo Sort</span></td>
+    </tr>
+    <tr>
+      <td class="year">2014 May</td>
+      <td class="scenario">Security clearance graph: minimum clearance c to travel from s to t.</td>
+      <td class="tags-cell"><span class="tag uf">Union-Find</span> <span class="tag bfs">BFS</span></td>
+    </tr>
+    <tr>
+      <td class="year">2013 May</td>
+      <td class="scenario">Sentence infection: infected sentences spread via shared words.</td>
+      <td class="tags-cell"><span class="tag uf">Union-Find</span></td>
+    </tr>
+    <tr>
+      <td class="year">2012 May</td>
+      <td class="scenario">Looped tree: shortest path. (a) Dijkstra, (b) faster via DAG SP on tree structure.</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag dag">DAG SP</span></td>
+    </tr>
+    <tr>
+      <td class="year">2011 Sep</td>
+      <td class="scenario">Looped tree: same as 2012.</td>
+      <td class="tags-cell"><span class="tag dijkstra">Dijkstra</span> <span class="tag dag">DAG SP</span></td>
+    </tr>
+    <tr>
+      <td class="year">2011 May</td>
+      <td class="scenario">Combination lock: minimum button presses avoiding forbidden configs.</td>
+      <td class="tags-cell"><span class="tag bfs">BFS</span></td>
+    </tr>
+    <tr>
+      <td class="year">2011 May (b)</td>
+      <td class="scenario">Slash maze: count cycles in a grid of / and \ characters.</td>
+      <td class="tags-cell"><span class="tag uf">Union-Find</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- KEY PATTERN SUMMARY -->
+<h2>The most important patterns — memorise these</h2>
+<div class="decision-tree">
+  <p style="color:var(--bfs); font-family: 'Space Mono', monospace; font-size:0.8rem; margin-bottom:0.8rem;">■ BFS — appears in ~12 of 20 exams</p>
+  <div class="branch" style="border-color:var(--bfs)">
+    <p style="font-size:0.85rem">Grid navigation with unit cost · Maze / reachability · State-space search (lock, board game) · "Fewest steps" or "minimum number of moves"</p>
+  </div>
+  <br>
+  <p style="color:var(--dijkstra); font-family: 'Space Mono', monospace; font-size:0.8rem; margin-bottom:0.8rem;">■ Dijkstra — appears in ~11 of 20 exams</p>
+  <div class="branch" style="border-color:var(--dijkstra)">
+    <p style="font-size:0.85rem">Weighted grid/graph · Travel time or distance with varying costs · "Shortest path" when weights ≥ 0</p>
+  </div>
+  <br>
+  <p style="color:var(--uf); font-family: 'Space Mono', monospace; font-size:0.8rem; margin-bottom:0.8rem;">■ Union-Find — appears in ~5 of 20 exams</p>
+  <div class="branch" style="border-color:var(--uf)">
+    <p style="font-size:0.85rem">Connectivity questions · "Are these in the same group?" · Infection spreading · Kruskal's MST · Binary search + connectivity threshold</p>
+  </div>
+  <br>
+  <p style="color:var(--dag); font-family: 'Space Mono', monospace; font-size:0.8rem; margin-bottom:0.8rem;">■ DAG shortest path — appears in ~4 of 20 exams</p>
+  <div class="branch" style="border-color:var(--dag)">
+    <p style="font-size:0.85rem">Prerequisites / ordering constraints · "Describe a faster algorithm" (when Dijkstra was already correct) · Temperature-ordered streets · Looped tree trick</p>
+  </div>
+</div>
+
+<footer>ALGORITHMS & DATA STRUCTURES · ITU EXAM PREP · BUILT FROM BADS 2011–2023</footer>
+
+</body>
+</html>
