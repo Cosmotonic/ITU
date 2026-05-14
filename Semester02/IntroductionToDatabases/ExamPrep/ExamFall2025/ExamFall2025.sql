@@ -70,7 +70,7 @@ where age > 30
 
 -- solution 1. 
 SELECT title, description, rating from boardgames
-WHERE (rating > 7.5 AND LOWER(description) LIKE '%a%') 
+WHERE (rating > 7.5 AND LOWER(description)  ) 
 OR (LOWER(title) LIKE '%a%')
 
 -- solution 2. 
@@ -372,9 +372,6 @@ from product;
 -- ANSWER: 
 -- The runtime performance of a hash join is linear. 
 -- If data is already sorted, the database can utilize sort-merge joins efficiently. 
-
-
-
 
 -- MSc Only: Big Data Management (5 points)
 
